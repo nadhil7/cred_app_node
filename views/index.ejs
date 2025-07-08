@@ -9,6 +9,22 @@
                 <div class="flex flex-wrap my-8">
                     <div class="w-full">
                         <div class="overflow-x-auto">
+                             <div class="w-5/6 m-auto h-10">
+                <% if (message) { %>
+                    <div class="flex items-center justify-between p-4 mb-4 rounded-lg shadow text-white
+              <%= message.type == 'success' ? 'bg-green-500' : 
+                  message.type == 'danger'? 'bg-red-500' :'bg-yellow-500' %>">
+                        <strong>
+                            <%= message.message %>
+                        </strong>
+                        <button class="text-white hover:text-gray-200 text-xl font-bold leading-none"
+                            onclick="this.parentElement.remove()" aria-label="Close">
+                            &times;
+                        </button>
+                    </div>
+                    <% } %>
+            </div>
+            <% if(users !="" ) { %>
                             <table class="min-w-full divide-y divide-gray-200 bg-white shadow rounded-lg">
                                 <thead class="bg-gray-100">
                                     <tr class="bg-black text-white">
@@ -27,16 +43,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                     <% users.forEach((row,index)=> { %>
                                     <tr>
-                                        <th>1</th>
-                                        <th><img src="" alt=""></th>
-                                        <th>Luffy</th>
-                                        <th>lufffy@gmail.com</th>
-                                        <th>8877665544</th>
-                                        <th>no</th>
+                                        <td><%= index %></td>
+                                        <td><img src="<%= row.image %>" alt="" class="w-20 h-20 my-4"></td>
+                                        <td><%= row.name %></td>
+                                        <td><%= row.email %></td>
+                                        <td><%= row.phone %></td>
+                                        <td class="py-2 px-4 flex items-center mt-8 gap-4"><a href="/edit/<%= row._id %>"><img src="/edit.png"
+                                            alt=""></a><a href="/delete/<%= row._id %>"><img src="/delete.png" alt=""></a></td>
                                     </tr>
+                                    <% }) %>
                                 </tbody>
                             </table>
+                            <% } else { %>
+                    <h1 class="text-center mt-5 text-5xl text-white">No users found !..</h1>
+                    <% } %>
                         </div>
                     </div>
                 </div>

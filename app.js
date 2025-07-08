@@ -21,6 +21,8 @@ app.use(session({
    saveUninitialized:true,
     resave:false
 }))
+app.use(express.static('public'))
+app.use(express.static('uploads'))
 
 app.use((req,res,next)=>{
     res.locals.message = req.session.message;
